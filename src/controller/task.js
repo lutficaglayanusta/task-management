@@ -23,7 +23,7 @@ export const fetchTaskController = async (req, res) => {
   const tasks = await fetchTaskService(id);
 
   res.status(200).json({
-    message: "Başarılı bir şekilde veriler geldi",
+    message: "The data was successfully fetched",
     data: tasks,
   });
 };
@@ -35,7 +35,7 @@ export const fetchOneTaskController = async (req, res) => {
   const task = await fetchOneTaskService(id, userId);
 
   res.status(200).json({
-    message: "Task geldi",
+    message: "The task was fetched successfully",
     data: task,
   });
 };
@@ -61,7 +61,7 @@ export const updateTaskController = async (req, res) => {
 
   res.status(status).json({
     status,
-    message: `Successfully upserted a student!`,
+    message: "Successfully upserted a student!",
     data: task.task,
   });
 };

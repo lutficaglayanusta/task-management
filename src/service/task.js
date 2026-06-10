@@ -1,3 +1,4 @@
+import createHttpError from "http-errors";
 import Task from "../db/models/task.js";
 
 export const addTaskService = async (payload, id) => {
@@ -13,10 +14,20 @@ export const fetchTaskService = async (id) => {
 export const fetchOneTaskService = async (id, userId) => {
   const task = await Task.findOne({ _id: id, userId });
 
+  if (!task) {
+    throw createHttpError(404, "Task not found");
+  }
+
   return task;
 };
 
 export const deleteTaskService = async (id, userId) => {
+  const task = await Task.findOne({ _id: id, userId });
+
+  if (!task) {
+    throw createHttpError(404, "Task not found");
+  }
+
   await Task.deleteOne({ _id: id, userId });
 };
 export const updateTaskService = async (userId, payload, id, options = {}) => {
